@@ -19,6 +19,7 @@ node_modules/
 # Segurança: nunca suba arquivos .env com senhas
 .env
 *.log
+config/FirebaseConfig.cs
 
 # --- Arquivos de Sistema Operacional ---
 .DS_Store
