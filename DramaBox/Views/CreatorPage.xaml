@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="DramaBox.Views.CreatorPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Criar"
+    BackgroundColor="{AppThemeBinding Light=#F4F6FB, Dark=#0B1220}"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*"
+          BackgroundColor="{AppThemeBinding Light=#F4F6FB, Dark=#0B1220}">
+
+        <!-- TOPBAR -->
+        <Grid Grid.Row="0"
+              Padding="12,12,12,10"
+              ColumnDefinitions="*,Auto"
+              BackgroundColor="{AppThemeBinding Light=#EFEFEF, Dark=#0F172ACC}">
+
+            <StackLayout Spacing="2" VerticalOptions="Center">
+                <Label Text="Área do Criador"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}" />
+            </StackLayout>
+
+            <Frame Grid.Column="1"
+                   WidthRequest="38"
+                   HeightRequest="38"
+                   CornerRadius="10"
+                   Padding="0"
+                   BorderColor="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                   BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0F172A}"
+                   HasShadow="True">
+                <Button Text="☾"
+                        FontSize="16"
+                        BackgroundColor="Transparent"
+                        TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}"
+                        Clicked="OnThemeClicked" />
+            </Frame>
+        </Grid>
+
+        <!-- CONTENT -->
+        <ScrollView Grid.Row="1">
+            <!-- padding bottom extra para Windows alcançar o fundo -->
+            <VerticalStackLayout Spacing="12" Padding="12,10,12,110">
+
+                <!-- DASHBOARD CARD (vidro) -->
+                <Border Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                        StrokeThickness="1"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0F172A}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="16"/>
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="10" Padding="14">
+
+                        <Grid ColumnDefinitions="*,Auto" VerticalOptions="Center">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="Dashboard"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}"/>
+                                <Label Text="Resumo do seu desempenho como criador."
+                                       FontSize="12.5"
+                                       FontAttributes="Bold"
+                                       TextColor="{AppThemeBinding Light=#64748B, Dark=#9CA3AF}"/>
+                            </VerticalStackLayout>
+
+                            <Border Grid.Column="1"
+                                    BackgroundColor="{AppThemeBinding Light=#F1F5F9, Dark=#111B34}"
+                                    Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                    StrokeThickness="1"
+                                    Padding="10,6">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="12"/>
+                                </Border.StrokeShape>
+                                <Label Text="Hoje"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       TextColor="{AppThemeBinding Light=#334155, Dark=#CBD5E1}"/>
+                            </Border>
+                        </Grid>
+
+                        <!-- METRICS -->
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+
+                            <!-- Receita -->
+                            <Border Grid.Column="0"
+                                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0B1220}"
+                                    Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                    StrokeThickness="1"
+                                    Padding="12">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="14"/>
+                                </Border.StrokeShape>
+
+                                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="6">
+                                    <Label Text="Receita"
+                                           FontSize="12.5"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#475569, Dark=#AAB3C2}"/>
+
+                                    <Border Grid.Column="1"
+                                            BackgroundColor="{AppThemeBinding Light=#EEF2FF, Dark=#111B34}"
+                                            Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                            StrokeThickness="1"
+                                            Padding="8,4">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="10"/>
+                                        </Border.StrokeShape>
+                                        <Label Text="R$"
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               TextColor="{AppThemeBinding Light=#1D4ED8, Dark=#93C5FD}"/>
+                                    </Border>
+
+                                    <Label Grid.Row="1"
+                                           Grid.ColumnSpan="2"
+                                           Text="R$ 128,40"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}"/>
+
+                                    <Label Grid.Row="2"
+                                           Grid.ColumnSpan="2"
+                                           Text="Toque para sacar (mín. R$ 50)"
+                                           FontSize="11.5"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#64748B, Dark=#9CA3AF}"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Curtidas -->
+                            <Border Grid.Column="1"
+                                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0B1220}"
+                                    Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                    StrokeThickness="1"
+                                    Padding="12">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="14"/>
+                                </Border.StrokeShape>
+
+                                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="6">
+                                    <Label Text="Curtidas"
+                                           FontSize="12.5"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#475569, Dark=#AAB3C2}"/>
+
+                                    <Border Grid.Column="1"
+                                            BackgroundColor="{AppThemeBinding Light=#F1F5F9, Dark=#111B34}"
+                                            Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                            StrokeThickness="1"
+                                            Padding="8,4">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="10"/>
+                                        </Border.StrokeShape>
+                                        <Label Text="♥"
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               TextColor="{AppThemeBinding Light=#2563EB, Dark=#93C5FD}"/>
+                                    </Border>
+
+                                    <Label Grid.Row="1"
+                                           Grid.ColumnSpan="2"
+                                           Text="12.940"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}"/>
+
+                                    <Label Grid.Row="2"
+                                           Grid.ColumnSpan="2"
+                                           Text="Total acumulado"
+                                           FontSize="11.5"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#64748B, Dark=#9CA3AF}"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Shares -->
+                            <Border Grid.Column="2"
+                                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0B1220}"
+                                    Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                    StrokeThickness="1"
+                                    Padding="12">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="14"/>
+                                </Border.StrokeShape>
+
+                                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="6">
+                                    <Label Text="Shares"
+                                           FontSize="12.5"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#475569, Dark=#AAB3C2}"/>
+
+                                    <Border Grid.Column="1"
+                                            BackgroundColor="{AppThemeBinding Light=#F1F5F9, Dark=#111B34}"
+                                            Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                            StrokeThickness="1"
+                                            Padding="8,4">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="10"/>
+                                        </Border.StrokeShape>
+                                        <Label Text="↗"
+                                               FontSize="12"
+                                               FontAttributes="Bold"
+                                               TextColor="{AppThemeBinding Light=#2563EB, Dark=#93C5FD}"/>
+                                    </Border>
+
+                                    <Label Grid.Row="1"
+                                           Grid.ColumnSpan="2"
+                                           Text="3.210"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}"/>
+
+                                    <Label Grid.Row="2"
+                                           Grid.ColumnSpan="2"
+                                           Text="Total acumulado"
+                                           FontSize="11.5"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#64748B, Dark=#9CA3AF}"/>
+                                </Grid>
+                            </Border>
+
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- MINHAS SÉRIES -->
+                <Border Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                        StrokeThickness="1"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0F172A}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="16"/>
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="10" Padding="14">
+
+                        <Label Text="Minhas séries"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}"/>
+
+                        <!-- GRID 2 colunas -->
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10" RowDefinitions="Auto,Auto" RowSpacing="10">
+
+                            <!-- Nova série (dashed look) -->
+                            <Border Grid.Row="0" Grid.Column="0"
+                                    Stroke="{AppThemeBinding Light=#CBD5E1, Dark=#334155}"
+                                    StrokeThickness="2"
+                                    BackgroundColor="{AppThemeBinding Light=#F8FAFC, Dark=#0B1220}">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="16"/>
+                                </Border.StrokeShape>
+
+                                <Grid HeightRequest="170">
+                                    <VerticalStackLayout Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
+                                        <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0F172A}"
+                                                Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                                StrokeThickness="1"
+                                                Padding="12">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="14"/>
+                                            </Border.StrokeShape>
+                                            <Label Text="+"
+                                                   FontSize="20"
+                                                   FontAttributes="Bold"
+                                                   HorizontalTextAlignment="Center"
+                                                   TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}"/>
+                                        </Border>
+
+                                        <Label Text="Nova série"
+                                               FontSize="12.5"
+                                               FontAttributes="Bold"
+                                               TextColor="{AppThemeBinding Light=#64748B, Dark=#9CA3AF}"/>
+                                    </VerticalStackLayout>
+
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnNewSeriesTapped"/>
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                            </Border>
+
+                            <!-- Card 1 -->
+                            <Border Grid.Row="0" Grid.Column="1"
+                                    Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                    StrokeThickness="1"
+                                    BackgroundColor="#0B1220">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="16"/>
+                                </Border.StrokeShape>
+
+                                <Grid HeightRequest="170">
+                                    <Image Source="https://i.pinimg.com/736x/3a/09/5f/3a095f600b9a0bf2a1f2c0edc25b4b77.jpg"
+                                           Aspect="AspectFill"/>
+
+                                    <BoxView>
+                                        <BoxView.Background>
+                                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                                <GradientStop Color="#B8000000" Offset="0"/>
+                                                <GradientStop Color="#00000000" Offset="0.62"/>
+                                            </LinearGradientBrush>
+                                        </BoxView.Background>
+                                    </BoxView>
+
+                                    <!-- Glass label -->
+                                    <Border Margin="10"
+                                            VerticalOptions="End"
+                                            Padding="10,9"
+                                            BackgroundColor="#1AFFFFFF"
+                                            Stroke="#26FFFFFF"
+                                            StrokeThickness="1">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="12"/>
+                                        </Border.StrokeShape>
+
+                                        <VerticalStackLayout Spacing="2">
+                                            <Label Text="Sombras da Cidade"
+                                                   FontSize="12"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#FFFFFFF2"
+                                                   LineBreakMode="TailTruncation"/>
+                                            <Label Text="Drama • 8 eps"
+                                                   FontSize="11"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#FFFFFFC7"
+                                                   LineBreakMode="TailTruncation"/>
+                                        </VerticalStackLayout>
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                            <!-- Card 2 -->
+                            <Border Grid.Row="1" Grid.Column="0"
+                                    Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                    StrokeThickness="1"
+                                    BackgroundColor="#0B1220">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="16"/>
+                                </Border.StrokeShape>
+
+                                <Grid HeightRequest="170">
+                                    <Image Source="https://i.pinimg.com/236x/16/a3/a9/16a3a9b01b5f3656d5f45401a2d3dbf4.jpg"
+                                           Aspect="AspectFill"/>
+
+                                    <BoxView>
+                                        <BoxView.Background>
+                                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                                <GradientStop Color="#B8000000" Offset="0"/>
+                                                <GradientStop Color="#00000000" Offset="0.62"/>
+                                            </LinearGradientBrush>
+                                        </BoxView.Background>
+                                    </BoxView>
+
+                                    <Border Margin="10"
+                                            VerticalOptions="End"
+                                            Padding="10,9"
+                                            BackgroundColor="#1AFFFFFF"
+                                            Stroke="#26FFFFFF"
+                                            StrokeThickness="1">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="12"/>
+                                        </Border.StrokeShape>
+
+                                        <VerticalStackLayout Spacing="2">
+                                            <Label Text="Última Chamada"
+                                                   FontSize="12"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#FFFFFFF2"
+                                                   LineBreakMode="TailTruncation"/>
+                                            <Label Text="Suspense • 5 eps"
+                                                   FontSize="11"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#FFFFFFC7"
+                                                   LineBreakMode="TailTruncation"/>
+                                        </VerticalStackLayout>
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                            <!-- Card 3 -->
+                            <Border Grid.Row="1" Grid.Column="1"
+                                    Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                    StrokeThickness="1"
+                                    BackgroundColor="#0B1220">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="16"/>
+                                </Border.StrokeShape>
+
+                                <Grid HeightRequest="170">
+                                    <Image Source="https://i.pinimg.com/736x/97/8e/4d/978e4dfb6dbae3dd322e76ad552406b4.jpg"
+                                           Aspect="AspectFill"/>
+
+                                    <BoxView>
+                                        <BoxView.Background>
+                                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                                <GradientStop Color="#B8000000" Offset="0"/>
+                                                <GradientStop Color="#00000000" Offset="0.62"/>
+                                            </LinearGradientBrush>
+                                        </BoxView.Background>
+                                    </BoxView>
+
+                                    <Border Margin="10"
+                                            VerticalOptions="End"
+                                            Padding="10,9"
+                                            BackgroundColor="#1AFFFFFF"
+                                            Stroke="#26FFFFFF"
+                                            StrokeThickness="1">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="12"/>
+                                        </Border.StrokeShape>
+
+                                        <VerticalStackLayout Spacing="2">
+                                            <Label Text="Runway"
+                                                   FontSize="12"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#FFFFFFF2"
+                                                   LineBreakMode="TailTruncation"/>
+                                            <Label Text="Romance • 6 eps"
+                                                   FontSize="11"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#FFFFFFC7"
+                                                   LineBreakMode="TailTruncation"/>
+                                        </VerticalStackLayout>
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <BoxView HeightRequest="40" Opacity="0" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

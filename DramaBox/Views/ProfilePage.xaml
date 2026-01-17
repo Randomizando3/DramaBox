@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="DramaBox.Views.ProfilePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Perfil"
+    BackgroundColor="{AppThemeBinding Light=#F4F6FB, Dark=#0B1220}"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*"
+          BackgroundColor="{AppThemeBinding Light=#F4F6FB, Dark=#0B1220}">
+
+        <!-- TOPBAR -->
+        <Grid Grid.Row="0"
+              Padding="12,12,12,10"
+              ColumnDefinitions="*,Auto"
+              BackgroundColor="{AppThemeBinding Light=#EFEFEF, Dark=#0F172ACC}">
+
+            <StackLayout Spacing="2" VerticalOptions="Center">
+                <Label Text="Perfil"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}" />
+                <Label Text="Conta e preferências"
+                       FontSize="12"
+                       TextColor="{AppThemeBinding Light=#64748B, Dark=#9CA3AF}" />
+            </StackLayout>
+
+            <Frame Grid.Column="1"
+                   WidthRequest="38"
+                   HeightRequest="38"
+                   CornerRadius="10"
+                   Padding="0"
+                   BorderColor="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                   BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0F172A}"
+                   HasShadow="True">
+                <Button Text="☾"
+                        FontSize="16"
+                        BackgroundColor="Transparent"
+                        TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}"
+                        Clicked="OnThemeClicked" />
+            </Frame>
+        </Grid>
+
+        <!-- CONTENT -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="12" Padding="12,10,12,110">
+
+                <!-- CARD PERFIL -->
+                <Border Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                        StrokeThickness="1"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0F172A}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+
+                    <Grid Padding="14">
+
+                        <!-- Badge do plano -->
+                        <Border HorizontalOptions="Start"
+                                VerticalOptions="Start"
+                                Padding="10,6"
+                                Stroke="#20FFFFFF"
+                                StrokeThickness="1">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="999" />
+                            </Border.StrokeShape>
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#4F46E5" Offset="0" />
+                                    <GradientStop Color="#F59E0B" Offset="1" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="★" FontSize="14" TextColor="White" />
+                                <Label x:Name="PlanBadgeLbl"
+                                       Text="Premium"
+                                       FontSize="12"
+                                       FontAttributes="Bold"
+                                       TextColor="White" />
+                            </HorizontalStackLayout>
+                        </Border>
+
+                        <VerticalStackLayout Spacing="10"
+                                             Padding="0,26,0,0"
+                                             HorizontalOptions="Center">
+
+                            <!-- Avatar -->
+                            <Border WidthRequest="78" HeightRequest="78" StrokeThickness="0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="999" />
+                                </Border.StrokeShape>
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#4F46E5" Offset="0" />
+                                        <GradientStop Color="#06B6D4" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+
+                                <Grid>
+                                    <Label x:Name="AvatarLbl"
+                                           Text="DL"
+                                           FontSize="22"
+                                           FontAttributes="Bold"
+                                           TextColor="White"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+
+                            <Label x:Name="NameLbl"
+                                   Text="Usuário"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}"
+                                   HorizontalTextAlignment="Center" />
+
+                            <Label x:Name="EmailLbl"
+                                   Text="email@exemplo.com"
+                                   FontSize="12"
+                                   TextColor="{AppThemeBinding Light=#64748B, Dark=#9CA3AF}"
+                                   HorizontalTextAlignment="Center" />
+
+                            <!-- Stats -->
+                            <FlexLayout Direction="Row" Wrap="Wrap" JustifyContent="Center" AlignItems="Center">
+
+                                <Border Margin="0,0,8,8" Padding="10,7"
+                                        BackgroundColor="{AppThemeBinding Light=#EEF2FF, Dark=#111B34}"
+                                        Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                        StrokeThickness="1">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="999" />
+                                    </Border.StrokeShape>
+                                    <Label x:Name="LikesLbl"
+                                           Text="❤️ 0 curtidas"
+                                           FontSize="12"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#1E40AF, Dark=#C7D2FE}" />
+                                </Border>
+
+                                <Border Margin="0,0,8,8" Padding="10,7"
+                                        BackgroundColor="{AppThemeBinding Light=#EEF2FF, Dark=#111B34}"
+                                        Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                        StrokeThickness="1">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="999" />
+                                    </Border.StrokeShape>
+                                    <Label x:Name="SavedLbl"
+                                           Text="📌 0 salvos"
+                                           FontSize="12"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#1E40AF, Dark=#C7D2FE}" />
+                                </Border>
+
+                                <Border Margin="0,0,0,8" Padding="10,7"
+                                        BackgroundColor="{AppThemeBinding Light=#EEF2FF, Dark=#111B34}"
+                                        Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                        StrokeThickness="1">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="999" />
+                                    </Border.StrokeShape>
+                                    <Label x:Name="PublishedLbl"
+                                           Text="🎬 0 publicados"
+                                           FontSize="12"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#1E40AF, Dark=#C7D2FE}" />
+                                </Border>
+
+                            </FlexLayout>
+
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <!-- ASSINATURA -->
+                <Border Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                        StrokeThickness="1"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0F172A}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="8" Padding="14">
+                        <Label Text="Assinatura"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}" />
+
+                        <Label Text="Gerencie seu plano e pagamentos."
+                               FontSize="12"
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#9CA3AF}" />
+
+                        <Button Text="Abrir planos"
+                                BackgroundColor="#2563EB"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="10"
+                                Padding="14,12"
+                                Clicked="OnOpenPlansClicked" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- SAIR -->
+                <Border Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                        StrokeThickness="1"
+                        BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0F172A}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
+
+                    <VerticalStackLayout Spacing="8" Padding="14">
+                        <Label Text="Sair"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}" />
+
+                        <Button Text="Encerrar sessão"
+                                BackgroundColor="#EF4444"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="10"
+                                Padding="14,12"
+                                Clicked="OnLogoutClicked" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <BoxView HeightRequest="40" Opacity="0" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

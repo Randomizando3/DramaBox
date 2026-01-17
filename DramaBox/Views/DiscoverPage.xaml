@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="DramaBox.Views.DiscoverPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Autorais"
+    BackgroundColor="{AppThemeBinding Light=#F4F6FB, Dark=#0B1220}"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*"
+          BackgroundColor="{AppThemeBinding Light=#F4F6FB, Dark=#0B1220}">
+
+        <!-- TOPBAR -->
+        <Grid Grid.Row="0"
+              Padding="12,12,12,10"
+              ColumnDefinitions="*,Auto"
+              BackgroundColor="{AppThemeBinding Light=#EFEFEF, Dark=#0F172ACC}">
+
+            <Label Text="Autorais"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}"
+                   VerticalOptions="Center"/>
+
+            <Frame Grid.Column="1"
+                   WidthRequest="38"
+                   HeightRequest="38"
+                   CornerRadius="10"
+                   Padding="0"
+                   BorderColor="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                   BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0F172A}"
+                   HasShadow="True">
+                <Button Text="☾"
+                        FontSize="16"
+                        BackgroundColor="Transparent"
+                        TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}"
+                        Clicked="OnThemeClicked"/>
+            </Frame>
+        </Grid>
+
+        <!-- CONTENT -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="12" Padding="12,10,12,110">
+
+                <CollectionView ItemsSource="{Binding Items}"
+                                SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                    StrokeThickness="1"
+                                    BackgroundColor="#0B1220">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="14"/>
+                                </Border.StrokeShape>
+
+                                <Grid HeightRequest="240">
+                                    <Image Source="{Binding CoverUrl}" Aspect="AspectFill"/>
+
+                                    <BoxView>
+                                        <BoxView.Background>
+                                            <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                                <GradientStop Color="#D1000000" Offset="0"/>
+                                                <GradientStop Color="#1A000000" Offset="0.55"/>
+                                                <GradientStop Color="#2A000000" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </BoxView.Background>
+                                    </BoxView>
+
+                                    <Grid Padding="14"
+                                          RowDefinitions="Auto,Auto,Auto"
+                                          VerticalOptions="End">
+
+                                        <Label Text="{Binding Title}"
+                                               FontSize="18"
+                                               FontAttributes="Bold"
+                                               TextColor="White"/>
+
+                                        <Label Grid.Row="1"
+                                               Text="{Binding Genre}"
+                                               FontSize="12"
+                                               TextColor="#D1D5DB"
+                                               Margin="0,6,0,0"/>
+
+                                        <Grid Grid.Row="2"
+                                              ColumnDefinitions="*,*,Auto"
+                                              ColumnSpacing="10"
+                                              Margin="0,12,0,0">
+
+                                            <Button Grid.Column="0"
+                                                    Text="▶  Assistir"
+                                                    BackgroundColor="White"
+                                                    TextColor="#111827"
+                                                    FontAttributes="Bold"
+                                                    CornerRadius="10"
+                                                    Padding="14,10"
+                                                    Clicked="OnOpenClicked"
+                                                    CommandParameter="{Binding .}"/>
+
+                                            <Border Grid.Column="1"
+                                                    BackgroundColor="#14FFFFFF"
+                                                    Stroke="#26FFFFFF"
+                                                    StrokeThickness="1"
+                                                    Padding="0">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="10"/>
+                                                </Border.StrokeShape>
+
+                                                <Button Text="ℹ  Detalhes"
+                                                        BackgroundColor="Transparent"
+                                                        TextColor="White"
+                                                        FontAttributes="Bold"
+                                                        Padding="14,10"
+                                                        Clicked="OnDetailsClicked"
+                                                        CommandParameter="{Binding .}"/>
+                                            </Border>
+
+                                            <Border Grid.Column="2"
+                                                    WidthRequest="54"
+                                                    BackgroundColor="#14FFFFFF"
+                                                    Stroke="#26FFFFFF"
+                                                    StrokeThickness="1"
+                                                    Padding="0">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="10"/>
+                                                </Border.StrokeShape>
+
+                                                <Button Text="⧉"
+                                                        BackgroundColor="Transparent"
+                                                        TextColor="White"
+                                                        FontAttributes="Bold"
+                                                        Padding="0"
+                                                        Clicked="OnShareClicked"
+                                                        CommandParameter="{Binding .}"/>
+                                            </Border>
+
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <BoxView HeightRequest="40" Opacity="0"/>
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

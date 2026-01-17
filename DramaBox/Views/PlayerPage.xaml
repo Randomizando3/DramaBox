@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DramaBox.Views.PlayerPage"
+    Title="Player"
+    BackgroundColor="Black">
+
+    <Grid RowDefinitions="*,Auto" Padding="0">
+
+        <!-- Player HTML5 -->
+        <WebView x:Name="VideoWeb"
+                 Grid.Row="0"
+                 BackgroundColor="Black" />
+
+        <Grid Grid.Row="1" Padding="12" BackgroundColor="#0B0B10">
+            <VerticalStackLayout Spacing="4">
+                <Label x:Name="DramaLbl"
+                       FontAttributes="Bold"
+                       FontSize="16"
+                       TextColor="White" />
+
+                <Label x:Name="EpLbl"
+                       FontSize="12"
+                       TextColor="#B6B6C6" />
+            </VerticalStackLayout>
+        </Grid>
+
+    </Grid>
+</ContentPage>

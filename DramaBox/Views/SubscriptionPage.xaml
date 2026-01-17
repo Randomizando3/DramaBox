@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DramaBox.Views.SubscriptionPage"
+    Title="Assinatura"
+    BackgroundColor="{StaticResource Bg}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
+
+            <Label Text="Planos"
+                   FontAttributes="Bold"
+                   FontSize="22" />
+
+            <Frame BackgroundColor="{StaticResource Card}"
+                   CornerRadius="18"
+                   Padding="16"
+                   HasShadow="False">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Free" FontAttributes="Bold" />
+                    <Label Text="Acesso básico e anúncios"
+                           TextColor="{StaticResource Muted}" />
+                    <Button Text="Ativo"
+                            BackgroundColor="#2A2A3E" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="{StaticResource Card}"
+                   CornerRadius="18"
+                   Padding="16"
+                   HasShadow="False">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Plus" FontAttributes="Bold" />
+                    <Label Text="Sem anúncios + episódios antecipados"
+                           TextColor="{StaticResource Muted}" />
+                    <Button Text="Assinar Plus (stub)" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="{StaticResource Card}"
+                   CornerRadius="18"
+                   Padding="16"
+                   HasShadow="False">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Premium" FontAttributes="Bold" />
+                    <Label Text="Tudo liberado + criador"
+                           TextColor="{StaticResource Muted}" />
+                    <Button Text="Assinar Premium (stub)" />
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

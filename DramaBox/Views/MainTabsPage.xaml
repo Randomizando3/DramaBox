@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="DramaBox.Views.MainTabsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:DramaBox.Views"
+    BarBackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0F172A}"
+    BarTextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"
+    SelectedTabColor="{AppThemeBinding Light=#2563EB, Dark=#93C5FD}"
+    UnselectedTabColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}">
+
+    <!-- Descobrir -->
+    <views:HomePage Title="Descobrir" />
+
+    <!-- Autorais -->
+    <views:DiscoverPage Title="Autorais" />
+
+    <!-- Criar (Área do Criador) -->
+    <views:CreatorPage Title="Criar" />
+
+    <!-- Biblioteca -->
+    <views:LibraryPage Title="Biblioteca" />
+
+    <!-- Perfil -->
+    <views:ProfilePage Title="Perfil" />
+
+</TabbedPage>

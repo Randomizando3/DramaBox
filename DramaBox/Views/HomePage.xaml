@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="DramaBox.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Descobrir"
+    BackgroundColor="{AppThemeBinding Light=#F4F6FB, Dark=#0B1220}"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*"
+          BackgroundColor="{AppThemeBinding Light=#F4F6FB, Dark=#0B1220}">
+
+        <!-- TOPBAR -->
+        <Grid Grid.Row="0"
+              Padding="12,12,12,10"
+              ColumnDefinitions="*,Auto"
+              BackgroundColor="{AppThemeBinding Light=#EFEFEF, Dark=#0F172ACC}">
+
+            <StackLayout Spacing="2">
+                <Label Text="Descobrir"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}" />
+            </StackLayout>
+
+            <Frame Grid.Column="1"
+                   WidthRequest="38"
+                   HeightRequest="38"
+                   CornerRadius="10"
+                   Padding="0"
+                   BorderColor="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                   BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#0F172A}"
+                   HasShadow="True">
+                <Button Text="☾"
+                        FontSize="16"
+                        BackgroundColor="Transparent"
+                        TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}"
+                        Clicked="OnThemeClicked" />
+            </Frame>
+        </Grid>
+
+        <!-- CONTENT -->
+        <ScrollView Grid.Row="1">
+            <!-- padding bottom extra para garantir chegar no fundo no Windows -->
+            <VerticalStackLayout Spacing="12" Padding="12,10,12,110">
+
+                <!-- Quickbar -->
+                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+
+                    <!-- Search pill -->
+                    <Frame Grid.Column="0"
+                           CornerRadius="14"
+                           Padding="12,10"
+                           BorderColor="{AppThemeBinding Light=#1A0F172A, Dark=#1FFFFFFF}"
+                           BackgroundColor="{AppThemeBinding Light=#0F0F172A, Dark=#14FFFFFF}"
+                           HasShadow="True">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8" VerticalOptions="Center">
+                            <Label Text="🔎"
+                                   FontSize="16"
+                                   TextColor="{AppThemeBinding Light=#D90F172A, Dark=#EBFFFFFF}"
+                                   VerticalOptions="Center" />
+                            <Entry Grid.Column="1"
+                                   x:Name="SearchEntry"
+                                   Placeholder="Pesquisar série, autor ou episódio..."
+                                   PlaceholderColor="{AppThemeBinding Light=#9E0F172A, Dark=#B8FFFFFF}"
+                                   TextColor="{AppThemeBinding Light=#EB0F172A, Dark=#EBFFFFFF}"
+                                   FontAttributes="Bold"
+                                   FontSize="13"
+                                   BackgroundColor="Transparent"
+                                   ReturnType="Search"
+                                   Completed="OnSearchCompleted" />
+                        </Grid>
+                    </Frame>
+
+                    <!-- Rewards -->
+                    <Grid Grid.Column="1" WidthRequest="44" HeightRequest="44">
+                        <Frame CornerRadius="10"
+                               Padding="0"
+                               BorderColor="{AppThemeBinding Light=#1A0F172A, Dark=#1FFFFFFF}"
+                               BackgroundColor="{AppThemeBinding Light=#0F0F172A, Dark=#14FFFFFF}"
+                               HasShadow="True">
+                            <Button Text="🎁"
+                                    FontSize="18"
+                                    BackgroundColor="Transparent"
+                                    TextColor="{AppThemeBinding Light=#D90F172A, Dark=#EBFFFFFF}"
+                                    Clicked="OnRewardsClicked"/>
+                        </Frame>
+
+                        <Frame HorizontalOptions="End"
+                               VerticalOptions="Start"
+                               TranslationX="6"
+                               TranslationY="-6"
+                               Padding="6,3"
+                               CornerRadius="999"
+                               BackgroundColor="#EF4444"
+                               BorderColor="{AppThemeBinding Light=#F4F6FB, Dark=#0B1220}"
+                               HasShadow="False">
+                            <Label Text="+30"
+                                   FontSize="11"
+                                   FontAttributes="Bold"
+                                   TextColor="White" />
+                        </Frame>
+                    </Grid>
+
+                    <!-- VIP -->
+                    <Frame Grid.Column="2"
+                           HeightRequest="44"
+                           CornerRadius="10"
+                           Padding="0"
+                           HasShadow="True"
+                           BorderColor="#14000000">
+                        <Frame.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#F7D77A" Offset="0" />
+                                <GradientStop Color="#F2B84F" Offset="1" />
+                            </LinearGradientBrush>
+                        </Frame.Background>
+
+                        <Button Text="VIP"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                TextColor="#3A2A00"
+                                BackgroundColor="Transparent"
+                                Padding="14,0"
+                                Clicked="OnVipClicked" />
+                    </Frame>
+                </Grid>
+
+                <!-- Slider -->
+                <Grid>
+                    <Frame CornerRadius="12"
+                           Padding="0"
+                           HasShadow="True"
+                           BorderColor="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                           BackgroundColor="#0B1220">
+                        <Grid>
+
+                            <CarouselView x:Name="HeroCarousel"
+                                          HeightRequest="245"
+                                          ItemsSource="{Binding HeroItems}"
+                                          IndicatorView="HeroIndicator"
+                                          PeekAreaInsets="0"
+                                          IsBounceEnabled="False"
+                                          IsScrollAnimated="False"
+                                          HorizontalScrollBarVisibility="Never">
+
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid HeightRequest="245">
+
+                                            <Image Source="{Binding CoverUrl}"
+                                                   Aspect="AspectFill"/>
+
+                                            <!-- Gradient overlay -->
+                                            <BoxView>
+                                                <BoxView.Background>
+                                                    <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                                        <GradientStop Color="#D1000000" Offset="0" />
+                                                        <GradientStop Color="#14000000" Offset="0.58" />
+                                                        <GradientStop Color="#2E000000" Offset="1" />
+                                                    </LinearGradientBrush>
+                                                </BoxView.Background>
+                                            </BoxView>
+
+                                            <!-- Content -->
+                                            <Grid Padding="14"
+                                                  RowDefinitions="Auto,Auto,Auto,Auto"
+                                                  VerticalOptions="End">
+                                                <Label Text="{Binding Kicker}"
+                                                       FontSize="12"
+                                                       FontAttributes="Bold"
+                                                       TextColor="White"
+                                                       Opacity="0.92"/>
+
+                                                <Label Grid.Row="1"
+                                                       Text="{Binding Title}"
+                                                       FontSize="17"
+                                                       FontAttributes="Bold"
+                                                       TextColor="White"
+                                                       Margin="0,4,0,0"/>
+
+                                                <HorizontalStackLayout Grid.Row="2"
+                                                                       Spacing="10"
+                                                                       Margin="0,6,0,0">
+                                                    <Label Text="{Binding EpisodesText}" FontSize="12" FontAttributes="Bold" TextColor="White" Opacity="0.9"/>
+                                                    <Label Text="{Binding DurationText}"  FontSize="12" FontAttributes="Bold" TextColor="White" Opacity="0.9"/>
+                                                    <Label Text="{Binding AgeText}"       FontSize="12" FontAttributes="Bold" TextColor="White" Opacity="0.9"/>
+                                                </HorizontalStackLayout>
+
+                                                <Button Grid.Row="3"
+                                                        Text="▶  Assistir"
+                                                        Margin="0,10,0,0"
+                                                        BackgroundColor="White"
+                                                        TextColor="#111827"
+                                                        FontAttributes="Bold"
+                                                        CornerRadius="10"
+                                                        Padding="12,10"
+                                                        Clicked="OnHeroPlayClicked"/>
+                                            </Grid>
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+
+                            </CarouselView>
+
+                        </Grid>
+                    </Frame>
+
+                    <!-- Dots -->
+                    <IndicatorView x:Name="HeroIndicator"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="End"
+                                   Margin="0,0,0,-10"
+                                   IndicatorColor="#5964748B"
+                                   SelectedIndicatorColor="#A62563EB"/>
+                </Grid>
+
+                <!-- Chips -->
+                <HorizontalStackLayout Spacing="8">
+                    <Button Text="Drama"
+                            Padding="12,7"
+                            CornerRadius="10"
+                            FontSize="13"
+                            FontAttributes="Bold"
+                            BackgroundColor="{AppThemeBinding Light=#DDDDDD, Dark=#111B34}"
+                            TextColor="{AppThemeBinding Light=#1E40AF, Dark=#C7D2FE}"
+                            HeightRequest="34"
+                            Clicked="OnChipClicked"/>
+
+                    <Button Text="Suspense"
+                            Padding="12,7"
+                            CornerRadius="10"
+                            FontSize="13"
+                            FontAttributes="Bold"
+                            BackgroundColor="{AppThemeBinding Light=#DDDDDD, Dark=#111B34}"
+                            TextColor="{AppThemeBinding Light=#1E40AF, Dark=#C7D2FE}"
+                            HeightRequest="34"
+                            Clicked="OnChipClicked"/>
+
+                    <Button Text="Fantasia"
+                            Padding="12,7"
+                            CornerRadius="10"
+                            FontSize="13"
+                            FontAttributes="Bold"
+                            BackgroundColor="{AppThemeBinding Light=#DDDDDD, Dark=#111B34}"
+                            TextColor="{AppThemeBinding Light=#1E40AF, Dark=#C7D2FE}"
+                            HeightRequest="34"
+                            Clicked="OnChipClicked"/>
+                </HorizontalStackLayout>
+
+                <!-- Novidades -->
+                <Grid RowDefinitions="Auto,Auto" RowSpacing="8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Novidades"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}"/>
+                        <Label Grid.Column="1"
+                               Text="Ver tudo"
+                               FontSize="12"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#9CA3AF}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSeeAllTapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+
+                    <CollectionView Grid.Row="1"
+                                    ItemsSource="{Binding NewItems}"
+                                    ItemsLayout="HorizontalList"
+                                    HorizontalScrollBarVisibility="Never"
+                                    SelectionMode="None">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid WidthRequest="132" HeightRequest="200">
+
+                                    <Border Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                            StrokeThickness="1"
+                                            BackgroundColor="#0B1220">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="12" />
+                                        </Border.StrokeShape>
+
+                                        <Grid>
+                                            <Image Source="{Binding CoverUrl}" Aspect="AspectFill"/>
+
+                                            <BoxView>
+                                                <BoxView.Background>
+                                                    <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                                        <GradientStop Color="#B8000000" Offset="0"/>
+                                                        <GradientStop Color="#00000000" Offset="0.55"/>
+                                                    </LinearGradientBrush>
+                                                </BoxView.Background>
+                                            </BoxView>
+
+                                            <!-- Tag -->
+                                            <Border IsVisible="{Binding HasTag}"
+                                                    BackgroundColor="{Binding TagColor}"
+                                                    Padding="8,5"
+                                                    HorizontalOptions="Start"
+                                                    VerticalOptions="Start"
+                                                    Margin="8">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="9"/>
+                                                </Border.StrokeShape>
+                                                <Label Text="{Binding TagText}"
+                                                       FontSize="11"
+                                                       FontAttributes="Bold"
+                                                       TextColor="White"/>
+                                            </Border>
+
+                                            <!-- GLASS overlay -->
+                                            <Border Margin="10"
+                                                    VerticalOptions="End"
+                                                    Padding="10,9"
+                                                    BackgroundColor="#1AFFFFFF"
+                                                    Stroke="#26FFFFFF"
+                                                    StrokeThickness="1">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="10"/>
+                                                </Border.StrokeShape>
+
+                                                <VerticalStackLayout Spacing="3">
+                                                    <Label Text="{Binding Title}"
+                                                           FontSize="12"
+                                                           TextColor="#FFFFFFF2"
+                                                           LineBreakMode="TailTruncation"/>
+                                                    <Label Text="{Binding Subtitle}"
+                                                           FontSize="11"
+                                                           TextColor="#FFFFFFC7"
+                                                           LineBreakMode="TailTruncation"/>
+                                                </VerticalStackLayout>
+                                            </Border>
+
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnNewCardTapped"/>
+                                            </Grid.GestureRecognizers>
+                                        </Grid>
+                                    </Border>
+
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+                </Grid>
+
+                <!-- Top 10 -->
+                <Grid RowDefinitions="Auto,Auto" RowSpacing="8" Margin="0,4,0,0">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Text="Brasil: top 10 em séries hoje"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#0F172A, Dark=#E5E7EB}"/>
+                        <Label Grid.Column="1"
+                               Text="Ver tudo"
+                               FontSize="12"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#9CA3AF}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSeeAllTapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+
+                    <CollectionView Grid.Row="1"
+                                    ItemsSource="{Binding Top10Series}"
+                                    ItemsLayout="HorizontalList"
+                                    HorizontalScrollBarVisibility="Never"
+                                    SelectionMode="None">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid WidthRequest="170" HeightRequest="200">
+
+                                    <Border Stroke="{AppThemeBinding Light=#E2E8F0, Dark=#1F2937}"
+                                            StrokeThickness="1"
+                                            BackgroundColor="#0B1220">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="12"/>
+                                        </Border.StrokeShape>
+
+                                        <Grid>
+                                            <Image Source="{Binding CoverUrl}" Aspect="AspectFill"/>
+
+                                            <BoxView>
+                                                <BoxView.Background>
+                                                    <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                                                        <GradientStop Color="#BD000000" Offset="0"/>
+                                                        <GradientStop Color="#00000000" Offset="0.58"/>
+                                                    </LinearGradientBrush>
+                                                </BoxView.Background>
+                                            </BoxView>
+
+                                            <Label Text="{Binding Rank}"
+                                                   FontSize="104"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#38FFFFFF"
+                                                   Margin="10,0,0,0"
+                                                   VerticalOptions="End"
+                                                   LineHeight="0.9"/>
+
+                                            <!-- GLASS overlay -->
+                                            <Border Margin="54,0,10,10"
+                                                    VerticalOptions="End"
+                                                    Padding="10,9"
+                                                    BackgroundColor="#1AFFFFFF"
+                                                    Stroke="#26FFFFFF"
+                                                    StrokeThickness="1">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="10"/>
+                                                </Border.StrokeShape>
+
+                                                <Label Text="{Binding Title}"
+                                                       FontSize="12"
+                                                       TextColor="#FFFFFFF2"
+                                                       LineBreakMode="TailTruncation"/>
+                                            </Border>
+
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnTop10CardTapped"/>
+                                            </Grid.GestureRecognizers>
+                                        </Grid>
+                                    </Border>
+
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+                </Grid>
+
+                <BoxView HeightRequest="40" Opacity="0" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DramaBox.Views.SplashPage"
+    NavigationPage.HasNavigationBar="False"
+    BackgroundColor="{StaticResource Bg}">
+
+    <Grid Padding="24">
+        <VerticalStackLayout VerticalOptions="Center" Spacing="16">
+            <Label Text="DramaBox"
+                   FontSize="40"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <Label Text="Seu feed de mini dramas"
+                   TextColor="{StaticResource Muted}"
+                   HorizontalOptions="Center" />
+
+            <ActivityIndicator IsRunning="True"
+                               Color="{StaticResource Primary}" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

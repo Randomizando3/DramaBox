@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DramaBox.App">
+
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <!-- CORES -->
+            <Color x:Key="Bg">#0B0B10</Color>
+            <Color x:Key="Card">#151521</Color>
+            <Color x:Key="Primary">#7A5CFF</Color>
+            <Color x:Key="Text">#FFFFFF</Color>
+            <Color x:Key="Muted">#B6B6C6</Color>
+
+            <!-- ESTILOS BASE -->
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{StaticResource Bg}" />
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Text}" />
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="14" />
+                <Setter Property="Padding" Value="14,12" />
+            </Style>
+
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="{StaticResource Text}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource Muted}" />
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

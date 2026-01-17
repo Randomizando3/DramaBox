@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DramaBox.Views.SearchPage"
+    Title="Buscar"
+    BackgroundColor="{StaticResource Bg}">
+
+    <Grid Padding="16" RowDefinitions="Auto,*" RowSpacing="12">
+
+        <Frame BackgroundColor="{StaticResource Card}"
+               CornerRadius="18"
+               Padding="12"
+               HasShadow="False">
+
+            <Entry Placeholder="Buscar dramas..." />
+        </Frame>
+
+        <Frame Grid.Row="1"
+               BackgroundColor="{StaticResource Card}"
+               CornerRadius="18"
+               Padding="16"
+               HasShadow="False">
+
+            <Label Text="Resultados aparecem aqui."
+                   TextColor="{StaticResource Muted}" />
+        </Frame>
+
+    </Grid>
+</ContentPage>
